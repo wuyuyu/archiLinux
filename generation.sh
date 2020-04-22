@@ -5,8 +5,7 @@
 // mode debug qui t affiche où est l erreur meme quand il y a des pipe:
 #set -o pipefail
 
-time=$1
-
+time=$(echo "$1/1000" | bc)
 while true
 do	
 	echo "OK"
