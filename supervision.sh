@@ -25,6 +25,10 @@ else
 		echo "L'execution du script generation.sh a été stopé."
 		echo "La taille de vos fichiers a dépassé $5 K"
 		echo $sizeOutPut $sizeOutPutError
+		zip log$(date "+%Y-%m-%d").zip $HOME/$4/$2 $HOME/$4/$3
+		mv log$(date "+%Y-%m-%d").zip $HOME/$4/
+
+		echo "Les fichiers sont bien zipé dans la répertoire utilisateur courant"
 	else
 		echo "Vos fichier n'a pas dépassé 200K"
 		echo "Taille du fichier sortie standart: $sizeOutPut K"
