@@ -11,20 +11,22 @@
 # $3 un nom de fichier pour loggela sortie erreur
 # $4 un nom de dossier de log
 
+logDir=$HOME/$4
+	outFile=$logDir/$2
+	errFile=$logDir/$3
+	mkdir -p $logDir
+	touch $outFile $errFile
 
 echo "ID de utilisateur courant: $UID"
 
 ./genTick $1 | ./genSensorData 2>&1 | {
-	echo 'blabla'
-	mkdir -p $HOME/$4
-	
     while IFS= read -r RAW_LINE; do
-
 		if [[ $RAW_LINE =~ Error ]]; then
-			echo "ouiiii j'ai error"
-			echo $RAW_LINE >> $HOME/$4/$3 	
+			echo "ouiiii j'ai erreur"
+			echo $RAW_LINE >> $outFile	
 		else
-			echo $RAW_LINE | cut -d ';' -f 1,2,3,5 >> $HOME/$4/$2
+			echo $RAW_LINE | cut -d ';' -f 1,2,3,5 >> $errFile
+
 		fi
 	
 	done
