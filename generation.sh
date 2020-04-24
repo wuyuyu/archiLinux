@@ -9,19 +9,19 @@
 
 echo $UID
 
+logDir=$HOME/$4
+	outFile=$logDir/$2
+	errFile=$logDir/$3
+	mkdir -p $logDir
+	touch $outFile $errFile
 
 ./genTick $1 | ./genSensorData 2>&1 | {
-	mkdir $4
-	sudo mv $4 $HOME
-	touch $2
-	touch $3
-	sudo mv *.log $HOME/$4
     while IFS= read -r RAW_LINE; do
 		if [[ $RAW_LINE =~ Error ]]; then
 			echo "ouiiii j'ai error"
-			echo $RAW_LINE >> $HOME/$4/$3 	
+			echo $RAW_LINE >> $outFile	
 		else
-			echo $RAW_LINE | cut -d ';' -f 1,2,3,5 >>$HOME/$4/$2
+			echo $RAW_LINE | cut -d ';' -f 1,2,3,5 >> $errFile
 		fi
 
 
