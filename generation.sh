@@ -11,16 +11,17 @@ echo $UID
 
 
 ./genTick $1 | ./genSensorData 2>&1 | {
-	echo 'blabla'
 	mkdir $4
 	sudo mv $4 $HOME
+	touch $2
+	touch $3
 	sudo mv *.log $HOME/$4
     while IFS= read -r RAW_LINE; do
 		if [[ $RAW_LINE =~ Error ]]; then
 			echo "ouiiii j'ai error"
-			echo $RAW_LINE >> $3 	
+			echo $RAW_LINE >> $HOME/$4/$3 	
 		else
-			echo $RAW_LINE | cut -d ';' -f 1,2,3,5 >>$2
+			echo $RAW_LINE | cut -d ';' -f 1,2,3,5 >>$HOME/$4/$2
 		fi
 
 
