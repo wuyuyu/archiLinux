@@ -23,9 +23,9 @@ echo "ID de utilisateur courant: $UID"
     while IFS= read -r RAW_LINE; do
 		if [[ $RAW_LINE =~ Error ]]; then
 			echo "ouiiii j'ai erreur"
-			echo $RAW_LINE >> $outFile	
+			echo $RAW_LINE >> $errFile	
 		else
-			echo $RAW_LINE | cut -d ';' -f 1,2,3,5 >> $errFile
+			echo $RAW_LINE | cut -d ';' -f 1,2,3,5 >> $outFile
 
 		fi
 	
