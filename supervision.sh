@@ -20,10 +20,11 @@ else
 	echo "Ok ça lance et le dossier existe"
 	sizeOutPut=$(du $HOME/$4/$2 | cut -d '/' -f 1)
 	sizeOutPutError=$(du $HOME/$4/$3 | cut -d '/' -f 1)
-	if [[ $sizeOutPut -ge $5 ]]; then
-		echo "La taille de votre fichier sortie STANDARD: $sizeOutPut K a dépassé $5 K"		
-	elif [[ $sizeOutPutError -ge $5 ]]; then
-		echo "La taille de votre fichier sortie Error: $sizeOutputError K  a dépassé $5 K"
+	if [[ $sizeOutPut -ge $5 ]] ||  [[ $sizeOutPutError -ge $5 ]]; then
+		killall generation.sh
+		echo "L'execution du script generation.sh a été stopé."
+		echo "La taille de vos fichiers a dépassé $5 K"
+		echo $sizeOutPut $sizeOutPutError
 	else
 		echo "Vos fichier n'a pas dépassé 200K"
 		echo "Taille du fichier sortie standart: $sizeOutPut K"
