@@ -1,0 +1,87 @@
+From c2fdec362f58b433320f56c1b6752d3346f342ca Mon Sep 17 00:00:00 2001
+From: Robin Penea <robin.penea@gmail.com>
+Date: Sat, 25 Apr 2020 18:25:52 +0200
+Subject: [PATCH] "Add Robin comments"
+
+---
+ feedback_robin.md | 18 ++++++++++++++++++
+ generation.sh     | 10 ++++++++++
+ supervision.sh    |  2 ++
+ 3 files changed, 30 insertions(+)
+ create mode 100644 feedback_robin.md
+
+diff --git a/feedback_robin.md b/feedback_robin.md
+new file mode 100644
+index 0000000..f3e4e6e
+--- /dev/null
++++ b/feedback_robin.md
+@@ -0,0 +1,18 @@
++# Feedback Robin
++
++Vos scripts sont très propres et soignés. J'aurais aimé que vous puissiez
++aller plus loin dans les stories, mais je sais que ce n'est pas un problème
++d'implication. Le cumul du remote, les enfants plus la difficulté des
++dernières semaines vous ont forcément atteintes.
++
++Globalement je suis très satisfait de votre montée en compétence sur Linux
++et sur la CLI. Vous avez acquis toutes notions que je voulais vous transmettre
++pendant la semaine.
++
++@Tania : Comme toujours, ton raisonnement est logique et bien orienté. Tu prends ton
++temps pour réfléchir, mais c'est un temps utile. C'est une qualité que tu dois 
++continuer à cultiver.
++
++@Yuyuan : J'ai eu le sentiment que tu étais beaucoup plus "présente" (comprendre
++moins effacée) cette semaine. Tu as clairement porté le projet pendant une période,
++C'est vraiment une belle évolution.
+diff --git a/generation.sh b/generation.sh
+index efe8589..83ba03a 100755
+--- a/generation.sh
++++ b/generation.sh
+@@ -4,6 +4,9 @@
+ #set -x
+ #set -o pipefail
+ 
++# ROBIN: Excellente idée de documenter votre script.
++# Le must : ajouter un argument -h qui affiche 
++# exactement ces informations.
+ 
+ # Ce script prend 4 parametres:
+ # $1 un int de milliseconde
+@@ -11,6 +14,12 @@
+ # $3 un nom de fichier pour loggela sortie erreur
+ # $4 un nom de dossier de log
+ 
++# ROBIN: Pour améliorer le programme, une chose qui aurait été
++# Très intéressante à faire ici aurait été de vérifier les arguments fournis.
++# Le genre de vérifications :
++#   * Nombre d'arguments
++#   * Contenu des arguments (nombres pour delay, nom valide pour les dossiers / fichiers)
++
+ logDir=$HOME/$4
+ 	outFile=$logDir/$2
+ 	errFile=$logDir/$3
+@@ -25,6 +34,7 @@ echo "ID de utilisateur courant: $UID"
+ 			echo "ouiiii j'ai erreur"
+ 			echo $RAW_LINE >> $errFile	
+ 		else
++            # ROBIN: propre :)
+ 			echo $RAW_LINE | cut -d ';' -f 1,2,3,5 >> $outFile
+ 
+ 		fi
+diff --git a/supervision.sh b/supervision.sh
+index a9096ce..25cce07 100755
+--- a/supervision.sh
++++ b/supervision.sh
+@@ -24,6 +24,8 @@ while true; do
+ 
+ 	else
+ 		echo "Ok ça lance et le dossier existe"
++        # ROBIN: Une petite variable pour stocker $HOME/$4 aurait été la bienvenue ici.
++        # Demain changez et $4 devient $5... Vous voyez où je veux en venir
+ 		sizeOutPut=$(du $HOME/$4/$2 | cut -d '/' -f 1)
+ 		sizeOutPutError=$(du $HOME/$4/$3 | cut -d '/' -f 1)
+ 		if [[ $sizeOutPut -ge $5 ]] ||  [[ $sizeOutPutError -ge $5 ]]; then
+-- 
+2.20.1
+
